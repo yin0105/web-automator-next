@@ -9,9 +9,21 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "axios": "0.19.2",
+    "axios-cache-adapter": "2.5.0",
+    "axios-debug-log": "0.8.0",
+    "deepmerge": "4.2.2",
+    "del": "5.1.0",
+    "geolib": "3.3.1",
+    "html-to-text": "6.0.0",
+    "mkdirp": "1.0.3",
     "next": "11.0.1",
     "react": "17.0.2",
-    "react-dom": "17.0.2"
+    "react-dom": "17.0.2",
+    "react-redux": "^7.2.4",
+    "shortid": "2.2.15",
+    "styled-components": "5.2.0",
+    "use-debounce": "5.0.1"
   },
   "devDependencies": {
     "eslint": "7.31.0",
