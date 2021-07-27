@@ -3,6 +3,7 @@ import { parse as parseHTML, HTMLElement } from 'node-html-parser';
 import { useDebounce } from 'use-debounce';
 import { fromString as HTMLtoString } from 'html-to-text';
 import * as geolib from 'geolib';
+import fetch from 'node-fetch';
 
 const recordTypeNames = {
   thing: ['person', 'place', 'artefact'],
@@ -101,22 +102,34 @@ export async function loadWikiPedia(
   return await (wikiCache[name] = wikiCache[name] || loadWikiPedia._load(name));
 }
 
-loadWikiPedia._load = async (name) => {
-  const apiURL = `/api/read_wkpd?name=${encodeURIComponent(name)}`;
-  const response = await fetch(apiURL);
+loadWikiPedia._load = async (name) => {  
+  const apiURL = `https://cloud.google.com/run/docs/quickstarts/build-and-deploy/python`;
+  // const apiURL = `/api/dbpedia/search`;
+  // const apiURL = `/api/read_wkpd?name=${encodeURIComponent(name)}`;
+  // const response = await fetch(apiURL);
+  fetch('https://jsonplaceholder.typicode.com/users')
+    .then(res => res.json())
+    .then(json => {
+        console.log("First user in the array:");
+        console.log(json[0]);
+        console.log("Name of the first user in the array:");
+        console.log(json[0].name);
+    })
 
-  if (response.status !== 200) return null;
+  // if (response.status !== 200) return null;
 
-  const text = await response.text();
-  const $ = parseHTML(text);
+  // const text = await response.text();
+  // const $ = parseHTML(text);
 
-  return {
-    title: fromWiki.getTitle($),
-    aliasList: fromWiki.getAlias($),
-    birthDate: fromWiki.getBirthDate($),
-    deathDate: fromWiki.getDeathDate($),
-    coordinate: fromWiki.getCoordinate($),
-  };
+  // console.log("text = ", text);
+
+  // return {
+  //   title: fromWiki.getTitle($),
+  //   aliasList: fromWiki.getAlias($),
+  //   birthDate: fromWiki.getBirthDate($),
+  //   deathDate: fromWiki.getDeathDate($),
+  //   coordinate: fromWiki.getCoordinate($),
+  // };
 };
 
 const useWikiPedia = (wikiName) => {
